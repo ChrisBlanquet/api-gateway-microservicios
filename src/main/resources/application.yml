@@ -1,0 +1,72 @@
+server:
+  port: 9000
+  address: 0.0.0.0
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 10000
+        response-timeout: 10s
+      server:
+        webmvc:
+          routes:
+            # 1. Autenticación
+            - id: auth-service
+              uri: lb://AUTH
+              predicates:
+                - Path=/api/auth/**
+
+            # 2. LIBRERIA
+            - id: convenios-service
+              uri: lb://LIBRERIA
+              predicates:
+                - Path=/api/cuadrillas/**, /api/personal/**, /api/departamentos/**
+            # 3. Ubicaciones (Remoto)
+            - id: servicio-ubicacion
+              uri: lb://UBICACION
+              predicates:
+                - Path=/api/ubicaciones/**
+
+            # 4. Gestión Institucional
+            - id: servicio-gestion
+              uri: lb://SERVICIO-GESTION-INSTITUCIONAL
+              predicates:
+                - Path=/api/gestion/**
+
+            # 5. Incidencias
+            - id: servicio-incidencias
+              uri: lb://SERVICIOINCIDENCIAS
+              predicates:
+                - Path=/api/incidencias/**
+
+            # 6. Notificaciones
+            - id: servicio-notificaciones
+              uri: lb://NOTIFICACIONES
+              predicates:
+                - Path=/api/v1/notificaciones/**
+
+            # 7. Evidencias
+            - id: servicio-evidencias
+              uri: lb://SERVICIO-EVIDENCIAS
+              predicates:
+                - Path=/api/evidencias/**
+
+            # 8. Comentarios y Seguimiento
+            - id: servicio-comentarios-seguimiento
+              uri: lb://COMENTARIOS-SEGUIMIENTO
+              predicates:
+                - Path=/api/comentarios/**
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 26.227.33.49
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://26.227.33.49:8761/eureka/
