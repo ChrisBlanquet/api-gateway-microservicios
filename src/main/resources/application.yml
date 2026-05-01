@@ -7,9 +7,12 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      # --- CONFIGURACIÓN DE RESILIENCIA ---
       httpclient:
         connect-timeout: 10000
         response-timeout: 10s
+        
+      # --- RUTEO DE MICROSERVICIOS (MVC) ---
       server:
         webmvc:
           routes:
@@ -23,7 +26,8 @@ spring:
             - id: convenios-service
               uri: lb://LIBRERIA
               predicates:
-                - Path=/api/cuadrillas/**, /api/personal/**, /api/departamentos/**
+                - Path=/api/cuadrillas/**, /api/personal/**, /api/departamentos/**, /api/test-bot/**
+            
             # 3. Ubicaciones (Remoto)
             - id: servicio-ubicacion
               uri: lb://UBICACION
@@ -46,7 +50,7 @@ spring:
             - id: servicio-notificaciones
               uri: lb://NOTIFICACIONES
               predicates:
-                - Path=/api/v1/notificaciones/**
+                - Path=/api/notificaciones/**
 
             # 7. Evidencias
             - id: servicio-evidencias
@@ -60,6 +64,13 @@ spring:
               predicates:
                 - Path=/api/comentarios/**
 
+            # 9. Reportes
+            - id: servicio-reportes
+              uri: lb://REPORTES
+              predicates:
+                - Path=/api/reportes/**
+
+# --- CONFIGURACIÓN DE DESCUBRIMIENTO (EUREKA) ---
 eureka:
   instance:
     prefer-ip-address: true
