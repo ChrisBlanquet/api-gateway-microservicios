@@ -37,3 +37,10 @@ Punto de entrada único (*Single Entry Point*) y orquestador de tráfico perimet
 * **Balanceo de Carga:** Spring Cloud LoadBalancer
 
 ---
+
+Autor
+Christopher Blanquet - Ingeniero en Sistemas Computacionales | Backend Developer
+
+LinkedIn: linkedin.com/in/christopherblanquet/
+
+GitHub: github.com/ChrisBlanquet
