@@ -18,7 +18,8 @@ public class GatewayCorsConfig {
         // La lista VIP exacta para tu frontend
         config.setAllowedOrigins(Arrays.asList(
             "http://localhost:5173", 
-            "http://26.*:5173"
+            "http://26.*:5173",
+            "https://app-ayuntamiento.duckdns.org"
         ));
         
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));

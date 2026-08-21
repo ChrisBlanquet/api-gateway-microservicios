@@ -22,13 +22,13 @@ spring:
               predicates:
                 - Path=/api/auth/**
 
-            # 2. LIBRERIA
+            # 2. LIBRERIA (Convenios y Cuadrillas)
             - id: convenios-service
               uri: lb://LIBRERIA
               predicates:
                 - Path=/api/cuadrillas/**, /api/personal/**, /api/departamentos/**, /api/test-bot/**
             
-            # 3. Ubicaciones (Remoto)
+            # 3. Ubicaciones
             - id: servicio-ubicacion
               uri: lb://UBICACION
               predicates:
@@ -70,14 +70,15 @@ spring:
               predicates:
                 - Path=/api/reportes/**
 
-# --- CONFIGURACIÓN DE DESCUBRIMIENTO (EUREKA) ---
+# ---(EUREKA) ---
 eureka:
   instance:
     prefer-ip-address: true
-    ip-address: 26.227.33.49
-    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
+    #ip-address: ${azure-public-ip}
+    #instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port} 
+    instance-id: ${spring.application.name}:${random.value}
   client:
     fetch-registry: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://26.227.33.49:8761/eureka/
+      defaultZone: http://${azure-public-ip}:8761/eureka/
