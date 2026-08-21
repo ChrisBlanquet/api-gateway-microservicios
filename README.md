@@ -1,10 +1,10 @@
-# 🚪 API Gateway (Spring Cloud Gateway)
+#  API Gateway (Spring Cloud Gateway)
 
 Punto de entrada único (*Single Entry Point*) y orquestador de tráfico perimetral para la arquitectura de microservicios. Implementado con **Spring Cloud Gateway** y **Spring Boot 3**.
 
 ---
 
-## 🚀 Características Principales
+##  Características Principales
 
 * **Enrutamiento Dinámico & Balanceo de Carga:** Ruteo transparente hacia servicios satélites mediante resolución de nombres y balanceo de carga con **Netflix Eureka** (`lb://`).
 * **Seguridad Perimetral & CORS Centralizado:** Configuración estricta de políticas de intercambio de recursos de origen cruzado (`CorsFilter`) con soporte para credenciales/cookies (`allowCredentials`).
