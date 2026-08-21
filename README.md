@@ -4,6 +4,13 @@ Punto de entrada único (*Single Entry Point*) y orquestador de tráfico perimet
 
 ---
 
+## Contexto de Despliegue & Arquitectura Distribuida
+
+Este servicio forma parte de una plataforma municipal modular desarrollada por un equipo multidisciplinario. 
+
+* **Despliegue Descentralizado:** Cada microservicio satélite (Gestión, Incidencias, Reportes, Evidencias) fue desarrollado y alojado en infraestructura independiente por los distintos ingenieros del equipo.
+* **Integración:** La comunicación inter-servicio y la validación de identidades se orquestan a través de este núcleo mediante **Service Discovery (Eureka)**, **Spring Cloud Gateway** y el **Auth Client SDK**.
+
 ##  Características Principales
 
 * **Enrutamiento Dinámico & Balanceo de Carga:** Ruteo transparente hacia servicios satélites mediante resolución de nombres y balanceo de carga con **Netflix Eureka** (`lb://`).
